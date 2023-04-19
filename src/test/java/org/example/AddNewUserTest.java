@@ -41,7 +41,7 @@ public class AddNewUserTest {
         driver.findElement(By.xpath("//input[@name='fullname']")).sendKeys(Uname);
         Thread.sleep(2000);
         driver.findElement(By.xpath("//input[@class='mobile-field']")).sendKeys(mobile);
-        //Thread.sleep(2000);
+        Thread.sleep(2000);
         driver.findElement(By.cssSelector("input[name='email']")).sendKeys(id);
         //Thread.sleep(2000);
         driver.findElement(By.xpath("//input[@name='password']")).sendKeys(Upass);
