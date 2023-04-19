@@ -12,8 +12,10 @@ import org.testng.annotations.Test;
 
 import io.github.bonigarcia.wdm.WebDriverManager;
 
+import java.util.concurrent.TimeUnit;
 
-public class searchfield {
+
+public class SearchFieldTest {
     WebDriver driver;
 
     @BeforeMethod
@@ -26,11 +28,12 @@ public class searchfield {
     }
 
     @Test(description = "User can search item successful")
-    void checkSearch_product() throws InterruptedException {
+    void checkSearch_product() {
+        driver.manage().timeouts().implicitlyWait(10, TimeUnit.SECONDS);
         driver.get("https://www.bewakoof.com/");
         driver.findElement(By.xpath("//*[@id=\"app\"]/div/div[2]/div[1]/header/div[2]/div/div[3]/div[2]/div/form/input")).sendKeys("shirts");
         driver.findElement(By.xpath("//*[@id=\"app\"]/div/div[2]/div[1]/header/div[2]/div/div[3]/div[2]/div/form/input")).sendKeys(Keys.ENTER);
-        System.out.println("Searched Item Succesfully");
+        System.out.println("Searched Item Successfully");
     }
 
     @AfterMethod

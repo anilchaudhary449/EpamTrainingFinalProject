@@ -11,22 +11,14 @@ import org.testng.annotations.Test;
 
 import java.util.concurrent.TimeUnit;
 
-import static java.time.Duration.of;
-import static java.time.Duration.ofMillis;
-
-
-
-
-public class addtocart {
+public class AddToCartTest {
 
     WebDriver driver;
     @BeforeMethod
-    void setUp()
-    {
+    void setUp() {
         WebDriverManager.chromedriver().setup();
         ChromeOptions options=new ChromeOptions();
-        options.addArguments("disable-notifications");
-        driver= new ChromeDriver(options);
+        driver=new ChromeDriver(options);
         driver.manage().window().maximize();
     }
     @Test(description="User can able to click Add to button successful.")

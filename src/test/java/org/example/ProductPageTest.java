@@ -11,7 +11,7 @@ import org.testng.annotations.Test;
 
 import io.github.bonigarcia.wdm.WebDriverManager;
 
-public class productpage
+public class ProductPageTest
 {
     WebDriver driver;
     @BeforeMethod
@@ -26,12 +26,12 @@ public class productpage
 
     void checkProduct(){
         driver.get("https://www.bewakoof.com/");
-        WebElement accessoriestab=driver.findElement(By.xpath("//a[contains(text(),'Accessories')]"));
-        Boolean b_productElement= accessoriestab.isDisplayed();
+        WebElement accessoriesTab=driver.findElement(By.xpath("//a[contains(text(),'Accessories')]"));
+        boolean b_productElement= accessoriesTab.isDisplayed();
         if(b_productElement)
         {
             System.out.println("Test cases passed");
-            System.out.println("menstab is visible");
+            System.out.println("MensTab is visible");
         }
         else
         {
