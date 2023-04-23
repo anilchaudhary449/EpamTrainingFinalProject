@@ -1,16 +1,15 @@
 package org.example;
 
 import io.github.bonigarcia.wdm.WebDriverManager;
-import org.openqa.selenium.By;
-import org.openqa.selenium.Keys;
-import org.openqa.selenium.WebDriver;
-import org.openqa.selenium.WebElement;
+import org.openqa.selenium.*;
 import org.openqa.selenium.chrome.ChromeDriver;
 import org.openqa.selenium.chrome.ChromeOptions;
 import org.openqa.selenium.interactions.Actions;
+import org.openqa.selenium.support.ui.Select;
 import org.testng.annotations.AfterMethod;
 import org.testng.annotations.BeforeMethod;
 import org.testng.annotations.Test;
+import org.testng.asserts.SoftAssert;
 
 import java.util.ResourceBundle;
 import java.util.concurrent.TimeUnit;
@@ -27,6 +26,7 @@ public class PaymentMethodTest {
         ChromeOptions options=new ChromeOptions();
         options.addArguments("disable-notifications");
         driver= new ChromeDriver(options);
+        driver.manage().window().maximize();
     }
     @Test(description="User can able to click Add to button successful.")
 
@@ -36,7 +36,7 @@ public class PaymentMethodTest {
         driver.get("https://www.bewakoof.com/login/");
         driver.findElement(By.cssSelector("#web_email_login")).click();
 
-        ResourceBundle r=ResourceBundle.getBundle("confidentials");
+        ResourceBundle r=ResourceBundle.getBundle("Confidential");
         String id=r.getString("email");
         String pass=r.getString("password");
         driver.findElement(By.xpath("//input[@id='email_input']")).sendKeys(id);
@@ -45,42 +45,37 @@ public class PaymentMethodTest {
         Actions action=new Actions(driver);
         action.doubleClick(element).perform();
 
-//            WebElement search=driver.findElement(By.xpath("//input[@placeholder='Search by product, category or collection']"));
-//            search.sendKeys("shirts");
-//            search.sendKeys(Keys.ENTER);
-//
-//            driver.findElement(By.xpath("//*[@id=\"testProductcard_3\"]/a/div")).click();
-//            WebElement size=driver.findElement(By.xpath("//div[@id='testSizes_L']"));
-//            Actions action1=new Actions(driver);
-//            action.moveToElement(size).click().perform();
-//            driver.findElement(By.cssSelector("#addToCart > span")).click();
-//            WebElement bad=driver.findElement(By.xpath("//span[contains(text(),'GO TO BAG')]"));
-//            action.doubleClick(bad).perform();
+        Thread.sleep(2000);
+        WebElement selectShirt= driver.findElement(By.xpath("//*[@id=\"app\"]/div/div[2]/div[1]/header/div[2]/div/div[3]/div[2]/div/form/input"));
+        selectShirt.sendKeys("shirts");
+        selectShirt.sendKeys(Keys.ENTER);
 
-        WebElement search=driver.findElement(By.xpath("//input[@placeholder='Search by product, category or collection']"));
-        search.sendKeys("shirt");
-        search.sendKeys(Keys.ENTER);
 
-//            WebElement price=driver.findElement((By.tagName("p")));
-//            price.getText();
-//            driver.findElement(By.id("os_payNow_btn")).click();
-//            //confirming the address
-//            WebElement address=driver.findElement(By.id("os_payNow_btn"));
-//
-//            //payment method
-//            WebElement upi=driver.findElement(By.id("testPaymentGateway-UPI"));
-//            action.moveToElement(address).moveToElement(upi).click().perform();
-//            WebElement typeupi=driver.findElement(By.id("pay_upi_input"));
-//            typeupi.sendKeys("6303739413@apl");
-//            driver.findElement(By.id("pay_upiPayNow_button")).click();
-//            //after verifying the user going to pay the amount
-//            WebElement pay=driver.findElement(By.id("pay_upiPayNow_button"));
-//            action.moveToElement(pay).click().perform();
-//            String currenturl=driver.getCurrentUrl();
-//            String expectedurl="https://www.bewakoof.com/ordersuccess?detail=eyJvcmRlcl9pZCI6NDQyNDQ4NDgsImNhc2hiYWNrIjowfQ==";
-//            SoftAssert softAssert = new SoftAssert();
-//            softAssert.assertEquals(currenturl, expectedurl);
-//            System.out.println("order sucessfull");
+        WebElement shirt=driver.findElement(By.xpath("//img[@title=\"Women's Purple Be Rad Graphic Printed Oversized T-shirt-Front Bewakoof\"]"));
+        shirt.click();
+
+        driver.findElement(By.xpath("//div[@id='testSizes_L']")).click();
+
+
+        driver.findElement(By.xpath("//span[normalize-space()='ADD TO BAG']")).click();
+        Thread.sleep(3000);
+        driver.findElement(By.xpath("//span[normalize-space()='GO TO BAG']")).click();
+
+
+        driver.findElement(By.xpath("//button[@id='os_payNow_btn']")).click();
+
+        driver.findElement(By.xpath("//span[normalize-space()='Cash On Delivery']")).click();
+
+        Thread.sleep(2000);
+        WebElement pay= driver.findElement(By.cssSelector("button[type='button']"));
+        pay.click();
+
+
+        String currentUrl=driver.getCurrentUrl();
+        String expectedUrl="https://www.bewakoof.com/ordersuccess?detail=eyJvcmRlcl9pZCI6NDQyNDQ4NDgsImNhc2hiYWNrIjowfQ==";
+        SoftAssert softAssert = new SoftAssert();
+        softAssert.assertEquals(currentUrl, expectedUrl);
+        System.out.println("Order Placed Successfully.");
 
 
 

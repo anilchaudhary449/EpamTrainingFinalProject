@@ -24,6 +24,7 @@ public class AddNewUserTest {
         ChromeOptions options=new ChromeOptions();
         options.addArguments("disable-notifications");
         driver= new ChromeDriver(options);
+        driver.manage().window().maximize();
     }
 
     @Test(description="New user registration to Bewakoof webpage")
@@ -31,7 +32,6 @@ public class AddNewUserTest {
         driver.manage().timeouts().implicitlyWait(10, TimeUnit.SECONDS);
         driver.get("https://www.bewakoof.com/signup");
         driver.manage().window().maximize();
-
 
         ResourceBundle r=ResourceBundle.getBundle("UData");
         String Uname=r.getString("name");

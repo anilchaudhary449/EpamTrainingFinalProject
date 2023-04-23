@@ -30,7 +30,7 @@ public class ExistingUserCheckTest {
         Actions action=new Actions(driver);
         driver.get("https://www.bewakoof.com/login/email");
         driver.findElement(By.cssSelector("#web_email_login")).click();
-        ResourceBundle r=ResourceBundle.getBundle("Confidentials");
+        ResourceBundle r=ResourceBundle.getBundle("Confidential");
         String id=r.getString("email");
         String pass=r.getString("password");
         driver.findElement(By.xpath("//input[@id='email_input']")).sendKeys(id);

@@ -41,6 +41,8 @@ public class AddToCartTest {
 
         Thread.sleep(2000);
         driver.findElement(By.xpath("//span[normalize-space()='ADD TO BAG']")).click();
+        Thread.sleep(2000);
+        driver.findElement(By.xpath("//span[normalize-space()='GO TO BAG']")).click();
 
         System.out.println("Test cases passed");
         System.out.println("AddToCart button clicked successfully");

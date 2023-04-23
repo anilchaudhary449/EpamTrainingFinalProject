@@ -38,6 +38,6 @@ public class SearchFieldTest {
 
     @AfterMethod
     void tearDown() {
-        driver.close();
+        //driver.close();
     }
 }

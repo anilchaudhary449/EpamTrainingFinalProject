@@ -5,7 +5,6 @@ import org.openqa.selenium.*;
 import org.openqa.selenium.chrome.ChromeDriver;
 import org.openqa.selenium.chrome.ChromeOptions;
 import org.openqa.selenium.interactions.Actions;
-import org.testng.AssertJUnit;
 import org.testng.annotations.AfterMethod;
 import org.testng.annotations.BeforeMethod;
 import org.testng.annotations.Test;
@@ -33,7 +32,7 @@ public class AddItemsToFavouriteTest {
         Actions action=new Actions(driver);
         driver.get("https://www.bewakoof.com/login/email");
         driver.findElement(By.cssSelector("#web_email_login")).click();
-        ResourceBundle r=ResourceBundle.getBundle("confidentials");
+        ResourceBundle r=ResourceBundle.getBundle("Confidential");
         String id=r.getString("email");
         String pass=r.getString("password");
         driver.findElement(By.xpath("//input[@id='email_input']")).sendKeys(id);
@@ -57,7 +56,6 @@ public class AddItemsToFavouriteTest {
         String CurrentUrl=driver.getCurrentUrl();
         String ExpectedUrl="https://www.bewakoof.com/wishlist";
 
-        AssertJUnit softAssert;
         assertEquals(CurrentUrl, ExpectedUrl);
     }
     @AfterMethod
